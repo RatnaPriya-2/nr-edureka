@@ -1,0 +1,22 @@
+.register-label {
+  font-size: 18px;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  color: #3a5075;
+}
+.register {
+  color: #3a5075;
+}
+
+.input-form-text {
+  color: #3a5075;
+}
+
+.register-btn {
+  color: white;
+  background-color: #eb2929;
+
+  width: 150px;
+  height: 50px;
+  font-size: 18px;
+}

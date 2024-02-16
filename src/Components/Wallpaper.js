@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import "../Styles/Home.css";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import Header from "./Header";
+import Main from "./Main";
 
 const lurl = "http://localhost:5000/locations";
 const rurl = "http://localhost:5000/restaurants?state_id=";
@@ -54,20 +57,31 @@ class Wallpaper extends Component {
     return (
       <div>
         <div className="container-fluid  background-img">
-          <div className="nav-bar">
+          {/* <div className="nav-bar">
             <ul className="nav justify-content-end ps-3 pt-4 pe-5">
               <li className="nav-item">
                 <a className="login pe-4 opacity-80" href="#">
                   Login
                 </a>
+                <Link className="login pe-4 opacity-80" to="/login">
+                  Login
+                </Link>
               </li>
               <li className="nav-item ">
                 <a className="createacc p-2 opacity-80 rounded-1" href="#">
                   Create an account
                 </a>
+                <Link
+                  className="createacc p-2 opacity-80 rounded-1"
+                  to="/register"
+                >
+                  Create an account
+                </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
+
+          <Main />
           <div className="row" />
           <div className="text-center mt-5 d-flex align-items-center justify-content-center mx-auto rounded-circle brand-logo">
             <p className="my-0">e!</p>

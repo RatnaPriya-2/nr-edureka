@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "../../Styles/Details.css";
 import Header from "../Header";
 import axios from "axios";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import MenuList from "./MenuList";
 
 const url = "http://localhost:5000";
 
@@ -11,11 +13,61 @@ class Detail extends Component {
     this.state = {
       toggle: 1,
       details: "",
+      menuList: "",
+      userItem: "",
+      mealId: sessionStorage.getItem("mealId"),
+      totalPrice: "",
     };
   }
 
   updateToggle = (id) => {
     this.setState({ toggle: id });
+  };
+
+  addToCart = (data) => {
+    this.setState({ userItem: data });
+    console.log(this.state.userItem);
+    let menuId = sessionStorage.getItem("menu");
+    let orderId = [];
+    console.log(menuId);
+    let result;
+    if (menuId) {
+      result = menuId.split(",").map((item) => {
+        orderId.push(parseInt(item));
+        return "ok";
+        console.log(result);
+      });
+    } else {
+      result = ["error"];
+    }
+
+    fetch(`${url}/menuItem`, {
+      method: "POST",
+      body: JSON.stringify(orderId),
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("MenuData", data);
+        let totalPrice = 0;
+        data.map((item) => {
+          totalPrice = totalPrice + parseFloat(item.menu_price);
+          return "Success";
+        });
+
+        console.log(totalPrice);
+        totalPrice = sessionStorage.setItem("totalPrice", totalPrice);
+      });
+  };
+
+  proceed = () => {
+    sessionStorage.setItem("menu", this.state.userItem);
+    this.props.history.push(
+      `/placeOrder/${this.state.details.restaurant_name}`
+    );
   };
 
   render() {
@@ -60,32 +112,51 @@ class Detail extends Component {
             </div>
 
             <hr />
-            <div
-              className={
-                this.state.toggle === 1 ? "display-content" : "content"
-              }
-            >
-              <p className="about">About this place</p>
-              <p className="cuisine-cost">Cuisine</p>
-              <p className="cuisine-cost-desc">
-                {details.mealTypes && details.mealTypes[0].mealtype_name} ,{" "}
-                {details.mealTypes && details.mealTypes[1].mealtype_name}
-              </p>
-              <p className="cuisine-cost">Average Cost</p>
-              <p className="cuisine-cost-desc">
-                ₹ {details.cost} for two people (approx.)
-              </p>
+            <div className="toggle-data">
+              <div
+                className={
+                  this.state.toggle === 1 ? "display-content" : "content"
+                }
+              >
+                <p className="about">About this place</p>
+                <p className="cuisine-cost">Cuisine</p>
+                <p className="cuisine-cost-desc">
+                  {details.mealTypes && details.mealTypes[0].mealtype_name} ,{" "}
+                  {details.mealTypes && details.mealTypes[1].mealtype_name}
+                </p>
+                <p className="cuisine-cost">Average Cost</p>
+                <p className="cuisine-cost-desc">
+                  ₹ {details.cost} for two people (approx.)
+                </p>
+              </div>
+              <div
+                className={
+                  this.state.toggle === 2 ? "display-content" : "content"
+                }
+              >
+                <h3 className="ph-number">Phone Number</h3>
+                <p className="contact-num">{details.contact_number}</p>
+                <p className="rest-detail-title">{details.restaurant_name}</p>
+                <p className="rest-address">{details.address}</p>
+              </div>
+              <div>
+                <Link to={`listing/${this.state.mealId}`}>
+                <button className="back-button">Back</button>
+                </Link>
+              </div>
             </div>
-            <div
-              className={
-                this.state.toggle === 2 ? "display-content" : "content"
-              }
-            >
-              <h3 className="ph-number">Phone Number</h3>
-              <p className="contact-num">{details.contact_number}</p>
-              <p className="rest-detail-title">{details.restaurant_name}</p>
-              <p className="rest-address">{details.address}</p>
+            <div className="menu-list">
+              <MenuList
+                menuData={this.state.menuList}
+                finalOrder={(data) => {
+                  this.addToCart(data);
+                }}
+              />
             </div>
+
+            <button className="proceed-btn" onClick={this.proceed}>
+              Proceed
+            </button>
           </div>
         </div>
       </div>
@@ -100,7 +171,12 @@ class Detail extends Component {
       method: "GET",
     });
     console.log(response.data[0]);
-    this.setState({ details: response.data[0] });
+    let menuData = await axios.get(`${url}/menu/${restId}`, {
+      method: "GET",
+    });
+    console.log(menuData.data);
+
+    this.setState({ details: response.data[0], menuList: menuData.data });
   }
 }
 

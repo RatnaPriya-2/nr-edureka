@@ -30,12 +30,12 @@ class ListingApi extends Component {
             <article className="side-form">
               <p className="filter-sorting">Filters</p>
               <section className="filter-group">
-                <p className="filter-type">Select Location</p>
+                {/* <p className="filter-type">Select Location</p>
                 <select name="location" id="location">
                   <option className="location-option" value="">
                     Select Location
                   </option>
-                </select>
+                </select> */}
               </section>
               <CuisineFilter
                 mealId={this.props.match.params.mealId}
@@ -61,6 +61,7 @@ class ListingApi extends Component {
   componentDidMount() {
     let mealId = this.props.match.params.mealId;
     console.log(mealId);
+    sessionStorage.setItem("mealId", mealId)
     fetch(`${murl}${mealId}`, { method: "GET" })
       .then((res) => res.json())
       .then((data) => {

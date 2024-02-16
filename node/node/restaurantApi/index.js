@@ -81,7 +81,6 @@ app.get("/restaurants", (req, res) => {
 //     });
 // });
 
-
 app.get("/filter/:mealId", (req, res) => {
   let query = {};
   let mealId = +req.params.mealId;
@@ -94,13 +93,12 @@ app.get("/filter/:mealId", (req, res) => {
     sort = { cost: req.query.sort };
   }
 
- if (cuisineId) {
-   query = {
-     "mealTypes.mealtype_id": mealId,
-     "cuisines.cuisine_id": cuisineId, // Corrected key without the space
-   };
-}
-  else if (lcost && hcost) {
+  if (cuisineId) {
+    query = {
+      "mealTypes.mealtype_id": mealId,
+      "cuisines.cuisine_id": cuisineId, // Corrected key without the space
+    };
+  } else if (lcost && hcost) {
     query = {
       "mealTypes.mealtype_id": mealId,
       $and: [{ cost: { $gt: lcost, $lt: hcost } }],
@@ -113,8 +111,8 @@ app.get("/filter/:mealId", (req, res) => {
     };
   }
 
-//   //  -1 = descending order
-//   //   1 = ascending order
+  //   //  -1 = descending order
+  //   //   1 = ascending order
 
   db.collection("restaurants")
     .find(query)
@@ -141,10 +139,10 @@ app.get("/details/:id", (req, res) => {
 
 // menu of restaurant
 
-app.get("/restaurantmenu/:id", (req, res) => {
+app.get("/menu/:id", (req, res) => {
   let id = +req.params.id;
 
-  db.collection("restaurantmenu")
+  db.collection("menu")
     .find({ restaurant_id: id })
     .toArray((err, result) => {
       if (err) throw err;
@@ -157,7 +155,7 @@ app.get("/restaurantmenu/:id", (req, res) => {
 
 app.post("/menuItem", (req, res) => {
   if (Array.isArray(req.body)) {
-    db.collection("restaurantmenu")
+    db.collection("menu")
       .find({ menu_id: { $in: req.body } })
       .toArray((err, result) => {
         if (err) throw err;

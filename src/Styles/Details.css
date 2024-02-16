@@ -4,7 +4,6 @@
   margin: 0;
   border: 0;
   font-family: "Poppins", sans-serif;
-
   box-sizing: border-box;
 }
 
@@ -47,20 +46,17 @@ p {
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 3px;
   opacity: 0.8;
-  color:#192F60;
-  font-size:15px;
-  font-weight:600;
-  padding:10px 15px;
+  color: #192f60;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 15px;
 }
 
 @media (min-width: 600px) {
   .gallery {
-  
-  bottom: 20px;
-  right: 20px;
- 
-  
-}
+    bottom: 20px;
+    right: 20px;
+  }
 }
 .rest-title {
   font-weight: 600;
@@ -119,6 +115,7 @@ p {
 }
 .tabs li a {
   text-decoration: none;
+  /* padding-right:60px; */
 }
 
 .tabs li:hover {
@@ -131,14 +128,23 @@ p {
   justify-content: flex-end;
 }
 
-.order-btn {
+.order-btn,
+.back-button {
   width: 162px;
   height: 40px;
   background: #ce0505;
   border-radius: 6px;
   color: white;
-
   font-size: 14px;
+}
+
+.proceed-btn {
+  width: 162px;
+  height: 40px;
+  background: #ce0505;
+  border-radius: 6px;
+  color: white;
+  margin-top:30px;
 }
 
 @media (min-width: 600px) {
@@ -147,8 +153,17 @@ p {
     height: 50px;
     font-size: 18px;
   }
+  .back-button {
+    width: 150px;
+    height: 50px;
+    font-size: 18px;
+  }
+  .proceed-btn {
+    width: 223px;
+    height: 50px;
+    font-size: 18px;
+  }
 }
-
 hr {
   border: 2px solid #d2d9e6;
   margin: 0px;

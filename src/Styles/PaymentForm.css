@@ -1,0 +1,137 @@
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #636f88;
+}
+
+.payment-container {
+  display: flex;
+}
+
+.payment-methods {
+  width: 40%;
+  padding: 20px;
+  background-color: #eaf0fa;
+}
+
+.payment-methods h3 {
+  padding-bottom: 40px;
+  padding-top: 30px;
+  padding-left: 1em;
+  border-bottom: 1px solid #cacfd8;
+  margin: 0;
+}
+
+.payment-methods ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.payment-methods ul li {
+  padding: 30px;
+  border-bottom: 1px solid #cacfd8;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.payment-details {
+  width: 60%;
+  padding: 0 20px 0 40px;
+}
+
+.payment-details h1 {
+  margin-bottom: 20px;
+}
+
+.card-details {
+  border: 1px solid #636f88;
+  border-radius: 5px;
+  padding: 30px;
+  overflow: hidden;
+}
+
+.dates-cvv {
+  display: flex;
+
+  /* gap: 203.5px; */
+}
+
+.dates-cvv .form-group {
+  width: 50%;
+}
+.form-group {
+  margin-bottom: 30px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+h3 {
+  color: #192f60;
+  padding-bottom: 15px;
+}
+
+input[type="text"] {
+  width: calc(100% - 22px);
+  padding: 14px 10px;
+  border: 1px solid #636f88;
+  border-radius: 5px;
+  font-size: 16px;
+}
+input[type="month"] {
+  width: 90%;
+  padding: 13px 10px;
+  border: 1px solid #636f88;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#cvv {
+  /* width: 170%; */
+}
+#pay-btn{
+  display: block;
+  width: 60%;
+  border: none;
+  border-radius: 5px;
+  background-color: #00baf2;
+  cursor: pointer;
+  color: white;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.pay-button {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* button:hover {
+  background-color: #0056b3;
+} */
+
+@media only screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .payment-methods,
+  .payment-details {
+    width: 100%;
+  }
+}
+#paytm {
+  background-color: #fafbfc;
+}
+
+.paytm-logo {
+  display: flex;
+  justify-content: center;
+  height: 120px;
+  /* background-color:#00baf2; */
+}
